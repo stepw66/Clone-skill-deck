@@ -26,6 +26,7 @@
   import FullSkillModal from "./FullSkillModal.svelte";
   import DiffModal from "./DiffModal.svelte";
   import RegistryTab from "./RegistryTab.svelte";
+  import EmojiPickerPopover from "./EmojiPickerPopover.svelte";
 
   let focusedIndex = $state(-1);
   let listEl: HTMLDivElement | undefined = $state();
@@ -447,5 +448,8 @@
 
     <!-- Archive diff / view dialog -->
     <DiffModal />
+
+    <!-- Singleton emoji picker — only ever one open at a time. -->
+    <EmojiPickerPopover />
   </div>
 {/if}

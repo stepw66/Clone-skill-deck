@@ -1,184 +1,189 @@
 <div align="center">
 
-<img src="media/banner.png" alt="Skill Deck" width="600">
+<img src="media/banner.png" alt="Skill Deck" width="640">
 
-<h3>Universal coding agent skill browser</h3>
+### the universal skill browser for AI coding agents
 
-<p>Desktop overlay for browsing, searching, and copying skill references across Claude Code, Cursor, Copilot, Codex, and many AI coding agents.</p>
+<p>One overlay. Every coding agent on your machine. Searchable in milliseconds.</p>
 
-![Tauri](https://img.shields.io/badge/Tauri-v2-24C8D8?style=flat-square&logo=tauri&logoColor=white)
-![Rust](https://img.shields.io/badge/Rust-1.90-000000?style=flat-square&logo=rust&logoColor=white)
-![Svelte](https://img.shields.io/badge/Svelte-5-FF3E00?style=flat-square&logo=svelte&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-6366f1?style=flat-square)
+<p>
+  <img src="https://img.shields.io/badge/Tauri-v2-24C8D8?style=flat-square&logo=tauri&logoColor=white" alt="Tauri">
+  <img src="https://img.shields.io/badge/Rust-1.90-000000?style=flat-square&logo=rust&logoColor=white" alt="Rust">
+  <img src="https://img.shields.io/badge/Svelte-5-FF3E00?style=flat-square&logo=svelte&logoColor=white" alt="Svelte">
+  <img src="https://img.shields.io/badge/agents-15+-6366f1?style=flat-square" alt="Agents">
+  <img src="https://img.shields.io/badge/platforms-win%20%7C%20mac%20%7C%20linux-2c2e3a?style=flat-square" alt="Platforms">
+  <img src="https://img.shields.io/badge/license-MIT-6366f1?style=flat-square" alt="License">
+</p>
 
 </div>
 
 ---
 
-## What It Does
+## the pain
 
-Press `Ctrl+Shift+K`, a browser overlay slides in. Search, filter, and browse agent artifacts in one place. Open an item to inspect content, copy its reference, and manage update metadata.
+Every coding agent invents its own skill format. Claude Code drops SKILL.md. Cursor has .mdc. Copilot has prompt files. Codex, Windsurf, Gemini, Cline, Roo, Continue, Aider, Amazon Q, JetBrains, Tabnine, Augment — each one with a different layout, a different folder, a different rendering convention.
 
-The Finder panel is on demand, open it only when needed via `Ctrl+F`, `/`, or the `Find` button. Finder open state is persisted per user.
+You install fifty skills across six agents and lose track of what you have, what you actually use, and which ones are stale. You hunt through dotfiles to remember a slash command. You re-read a SKILL.md you wrote three months ago because no UI lets you skim them all.
 
-No switching between editors. No hunting through dotfiles. One overlay, everything visible.
+## what skill deck does
 
-## Supported Agents
+Press `Ctrl+Shift+K`. A panel slides in. Every skill, command, hook, rule, prompt, and workflow you have across every coding agent, in one searchable list. Click one, see the body. Star the good ones. Snapshot before you let the agent overwrite them.
 
-Skill Deck supports 15+ coding agents through a single registry and parser pipeline.
+No editor-switching. No dotfile spelunking. One overlay, everything visible, instant.
 
-Examples include Claude Code, Codex, Cursor, GitHub Copilot, Windsurf, Gemini CLI, Cline, Roo Code, Continue, Aider, Amazon Q, JetBrains AI, Tabnine, Augment, and universal `AGENTS.md` conventions.
-
-Artifact support includes skills, slash commands, and hooks (Claude settings hooks), plus rules, prompts, workflows, and config files where present.
-
-## Features
-
-- **Universal scan** — discovers agent artifacts from all 15+ agents in one pass
-- **Live search** — instant filter across skill names and descriptions
-- **Type filters** — filter by artifact type, skill, command, hook, rule, workflow, prompt, or config
-- **Intent filters** — use-case and tag facets to answer when to use a skill
-- **On-demand Finder** — search and intent filters stay available, shown only when requested
-- **Finder persistence** — remembers whether Finder was open or collapsed
-- **Starred skills** — pin your most-used skills to a dedicated tab
-- **Command and hook copy flow** — copy slash commands and hook commands directly when available
-- **Update checker** — detects newer versions of skills from their GitHub repos
-- **Repo detection** — automatically finds the GitHub source and `npx skills add` command for each skill
-- **Card View** — parent/child skill hierarchies rendered as collapsible cards
-- **Agent groups** — skills organized by agent with brand colors
-- **Theme system** — System, Dark, and Light modes
-- **Overlay behavior modes** — switch between pinned and auto-hide in tray menu or in-app settings
-- **Global hotkey** — `Ctrl+Shift+K` default, configurable to any valid 2-key or 3-key combo
-- **Avatar icon customization** — click the skill icon to assign an emoji quickly
-
-## Platform Support
-
-Current status for v0.1:
-
-| Capability | Windows | macOS | Linux |
-|---|---|---|---|
-| Overlay, scan, search, starred, grouped/Card View, update checks | Yes | Yes | Yes |
-
-## Install & Run
-
-**Prerequisites:** [Rust](https://rustup.rs), [Node.js 22+](https://nodejs.org), [pnpm 10+](https://pnpm.io)
+## quickstart in 30 seconds
 
 ```bash
 git clone https://github.com/OthmanAdi/skill-deck
 cd skill-deck
-pnpm install
-pnpm tauri dev
+pnpm install && pnpm tauri dev
 ```
 
-**Production build:**
+Press `Ctrl+Shift+K` anywhere on your desktop. The overlay opens. Type. Skills filter live.
+
+For a production binary instead of dev mode:
 
 ```bash
 pnpm tauri build
 ```
 
-Binary output: `src-tauri/target/release/`
+Or grab a prebuilt installer from the [latest release](https://github.com/OthmanAdi/skill-deck/releases/latest).
 
-## Releases
+## who supports what
 
-Prebuilt binaries and installers are published on GitHub Releases.
+Skill Deck reads from every agent below through one adapter pipeline. The frontend never sees agent-specific formats — everything normalizes to a single Skill struct.
 
-- Windows x64: NSIS installer, MSI installer, executable
-- macOS ARM64 and x64: platform bundles generated by Tauri action
-- Linux x64: platform bundles generated by Tauri action
+| Agent | Artifacts read |
+|---|---|
+| Claude Code | SKILL.md, slash commands, settings hooks, agents, plugins |
+| Codex | SKILL.md, AGENTS.md |
+| Cursor | .mdc rules |
+| GitHub Copilot | .prompt.md, .instructions.md, copilot-instructions.md |
+| Windsurf | .windsurfrules |
+| Gemini CLI | GEMINI.md, command files |
+| Cline | .clinerules |
+| Roo Code | .roomodes, custom prompts |
+| Continue, Aider, Amazon Q, JetBrains AI, Tabnine, Augment | per-agent skill + rule files |
+| Universal | AGENTS.md |
 
-Latest release page: `https://github.com/OthmanAdi/skill-deck/releases/latest`
+Adding a sixteenth agent is one struct entry in `registry.rs`. See [Adding a New Agent](#adding-a-new-agent).
 
-**Run tests:**
+## features
 
-```bash
-cd src-tauri && cargo test
-pnpm check
-```
+| | What it does |
+|---|---|
+| **Universal scan** | One pass across all 15+ agents, normalized into a single skill list. |
+| **Live search + facets** | Filter by name, description, tag, intent, language, slash command, hook event. |
+| **On-demand finder** | `Ctrl+F` opens a focused filter panel. State persists per session. |
+| **Tree + grouped views** | Card hierarchies for nested skills, grouped lists by agent with brand colors. |
+| **Marketplace registry** | First-party integration with [skills.sh](https://skills.sh) and [ClawHub](https://clawhub.ai) — search public skills, copy the `npx skills add` command, install in one shell. |
+| **Update detection** | Auto-discovers the GitHub source for each skill and checks for upstream commits behind the GitHub API. |
+| **Snapshot + restore** | Every update writes a content-hashed snapshot. Diff against the prior version side-by-side. Restore in one click. |
+| **Starred + history pills** | Pin the skills you actually use. See installed-since / updated-since timestamps on every card. |
+| **Themes** | System / Dark / Light, all with proper contrast. Font scale slider. |
+| **Hotkey + tray + auto-hide** | Configurable global hotkey, system tray with mode toggles, auto-hide on focus loss. |
 
-## Architecture
-
-Adapter pattern — adding a new agent is one struct in one file.
+## under the hood
 
 ```
 src-tauri/src/
-├── agents/
-│   ├── registry.rs       # All 15+ agents: paths, format, brand color
-│   └── scanner.rs        # Filesystem glob → parse → Vec<Skill>
-├── parsers/
-│   ├── frontmatter.rs    # Universal YAML+MD parser (covers 90% of formats)
-│   ├── skill_md.rs       # SKILL.md format (Claude Code, Codex)
-│   └── claude_hooks.rs   # Claude settings hook extraction
-├── models/
-│   ├── skill.rs          # Universal Skill struct — all adapters normalize here
-│   ├── agent.rs          # AgentInfo: paths, format, brand color per agent
-│   └── config.rs         # User preferences: hotkey, starred skills, theme
-├── commands/             # Tauri IPC commands
-│   ├── skills.rs         # scan_skills, list_agents, read_skill_content
-│   ├── preferences.rs    # toggle_star, set_hotkey, get_config
-│   └── updates.rs        # check_skill_update, set_skill_repo
-└── detection/
-    ├── repo_detector.rs  # GitHub URL + npx install command extraction
-    ├── update_checker.rs # GitHub API version comparison
-    └── skill_history.rs  # Local snapshots for restore workflow
+├── agents/registry.rs     # the only file you edit to add an agent
+├── agents/scanner.rs      # filesystem glob → adapter dispatch → Vec<Skill>
+├── parsers/               # frontmatter + skill_md + claude_hooks
+├── models/skill.rs        # universal Skill struct, the single source of truth
+├── detection/             # repo detection, update checker, snapshot history
+│   └── marketplaces/      # skills.sh + clawhub providers
+└── commands/              # Tauri IPC surface (scan, star, snapshot, restore, etc.)
 
-src/
-└── lib/
-    ├── components/       # Svelte 5 overlay UI components
-    ├── stores/           # Runes-based state ($state, $derived)
-    └── types/            # TypeScript interfaces matching Rust models
+src/lib/
+├── components/            # Svelte 5 overlay UI
+├── stores/                # runes-based state (no writable/derived stores)
+└── types/                 # TypeScript mirrors of Rust models
 ```
 
-### Skill Discovery
+**Key rule.** The Svelte frontend never sees agent-specific shapes. Every adapter normalizes to `models/skill.rs`. Adding an agent is one struct edit; everything else cascades automatically.
 
-Skill Deck enriches parsed artifacts with normalized discovery tags and use-case labels.
+Detailed discovery + parser notes: [`docs/skill-discovery.md`](docs/skill-discovery.md).
 
-- Frontmatter tags and categories are used when available
-- A deterministic heuristic fallback classifies skills by intent
-- Faceted filters in the overlay help users decide which skill to run
+## adding a new agent
 
-Detailed design notes: `docs/skill-discovery.md`
-
-**Key rule:** The frontend never sees agent-specific types. Everything normalizes to `models/skill.rs`. Adding a new agent means editing only `registry.rs`.
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Desktop shell | [Tauri v2](https://tauri.app) |
-| Backend | Rust 1.90, tokio, serde, gray_matter, reqwest |
-| Frontend | Svelte 5 (runes), SvelteKit 2, Tailwind CSS v4, TypeScript |
-
-
-## Adding a New Agent
-
-1. Add a variant to `AgentId` enum in `src-tauri/src/models/skill.rs`
-2. Add one entry to `src-tauri/src/agents/registry.rs` with: `display_name`, `paths` (using `$HOME`/`$PROJECT`), `format`, `brand_color`
+1. Add a variant to the `AgentId` enum in `src-tauri/src/models/skill.rs`.
+2. Add one entry to `src-tauri/src/agents/registry.rs` with `display_name`, `paths` (using `$HOME` / `$PROJECT`), `format`, `brand_color`.
 3. If the format is novel, add a parser in `src-tauri/src/parsers/`. Otherwise `frontmatter.rs` handles it.
 
-The scanner picks it up automatically. No other changes needed.
+The scanner picks it up automatically. No other code changes needed.
 
-## Project Setup for AI Agents
+## install paths
 
-This repo is instrumented for multi-agent development:
+Prebuilt binaries via GitHub Releases:
 
-| File | Agent |
-|------|-------|
+- **Windows x64** — NSIS installer (`.exe`), MSI, or raw executable
+- **macOS** — ARM64 and x64 platform bundles
+- **Linux x64** — AppImage / deb / rpm
+
+Latest release: [`/releases/latest`](https://github.com/OthmanAdi/skill-deck/releases/latest)
+
+Build from source:
+
+```bash
+pnpm install
+pnpm tauri build
+# binaries under src-tauri/target/release/
+```
+
+## platform support
+
+| Capability | Windows | macOS | Linux |
+|---|---|---|---|
+| Overlay + scan + search + Card View + facets | ✓ | ✓ | ✓ |
+| Global hotkey + tray | ✓ | ✓ | ✓ |
+| Marketplace registry (skills.sh + ClawHub) | ✓ | ✓ | ✓ |
+| Snapshot + diff + restore | ✓ | ✓ | ✓ |
+| Update detection (GitHub API) | ✓ | ✓ | ✓ |
+
+## tech stack
+
+| Layer | Technology |
+|---|---|
+| Desktop shell | [Tauri v2](https://tauri.app) |
+| Backend | Rust 1.90, tokio, serde, [gray_matter](https://crates.io/crates/gray_matter), reqwest |
+| Frontend | [Svelte 5](https://svelte.dev) (runes), SvelteKit 2, Tailwind CSS v4, TypeScript |
+| Marketplace clients | reqwest against [skills.sh](https://skills.sh) + [ClawHub](https://clawhub.ai) public APIs |
+| Syntax highlight | [highlight.js](https://highlightjs.org) |
+
+## built on the shoulders of
+
+- [Tauri](https://github.com/tauri-apps/tauri) — the desktop runtime that makes Rust + Svelte ship as one binary
+- [Svelte 5](https://github.com/sveltejs/svelte) — runes-based reactive UI that compiles to almost nothing
+- [skills.sh](https://skills.sh) + [ClawHub](https://clawhub.ai) — the public skill marketplaces this app reads
+- [highlight.js](https://github.com/highlightjs/highlight.js) — the syntax highlighter used in skill body preview + diff view
+- [gray_matter](https://github.com/the-alchemists-of-arland/gray-matter-rs) — the YAML + markdown frontmatter parser at the heart of the universal adapter
+
+## project setup for AI agents working on this repo
+
+This repo is instrumented for multi-agent development. Each agent gets its own briefing file at the root:
+
+| File | Read by |
+|---|---|
 | `CLAUDE.md` | Claude Code |
-| `AGENTS.md` | Codex, Copilot, all universal |
+| `AGENTS.md` | Codex, Copilot, all universal-AGENTS.md aware tools |
 | `GEMINI.md` | Gemini CLI |
 | `.cursorrules` | Cursor |
 | `.windsurfrules` | Windsurf |
 | `.github/copilot-instructions.md` | GitHub Copilot |
 
-## Contributing
+## contributing
 
-Please read `CONTRIBUTING.md` and `SECURITY.md` before opening pull requests.
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md) before opening a pull request.
 
-1. Fork the repo
-2. Add a new agent — edit only `registry.rs` (see [Adding a New Agent](#adding-a-new-agent))
-3. Or fix a bug, add a theme, improve a parser
-4. Run `cargo test && cargo clippy -- -D warnings && pnpm check` before submitting
-5. Open a PR
+```bash
+cd src-tauri && cargo test
+cargo clippy -- -D warnings
+pnpm check
+```
 
-## License
+Pull requests welcome — particularly new adapters in `registry.rs`, new parsers in `parsers/`, and new marketplace providers in `detection/marketplaces/`.
 
-MIT — [Ahmad Adi](https://github.com/OthmanAdi)
+## license
+
+MIT — [Ahmad Adi](https://github.com/OthmanAdi).
